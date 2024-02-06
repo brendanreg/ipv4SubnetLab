@@ -40,3 +40,28 @@ On to part 2 of the lab:
 So there's a new site and we have to configure the subnet a bit different. This time we need to subdivide the network 192.168.1.64/26 into as many subnets as possible that support 8 hosts. Anytime we're looking for hosts I know I can just count the powers of 2 and subtract 2 until I get as close as possible. 2^3=8 doesn't work because that would give us 6 hosts, so our next option is 2^4=16 which gives us 14 hosts per subnet. 
 So we know we need 4 bits in the host portion. We currently have 32-26 = 6 bits in the host portion so we can lend 2 of those bits to the network portion to create a /28 subnet mask.
 
+Subnet 1: 192.168.1.01 00 0000 -> 192.168.1.64
+Subnet 2: 192.168.1.01 01 0000 -> 192.168.1.80
+Subnet 3: 192.168.1.01 10 0000 -> 192.168.1.96
+Subnet 4: 192.168.1.01 11 0000 -> 192.168.1.112
+
+Let's configure the devices accordingly:
+
+![sn2 site3](https://github.com/brendanreg/ipv4SubnetLab/assets/48809270/f89540b5-5b3b-427f-9e89-b2d698051e8c)
+
+Now let's configure a /30 subnet for the serial links:
+
+192.168.1.0111 00 00 -> 192.168.1.112
+192.168.1.0111 01 00 -> 192.168.1.116
+192.168.1.0111 10 00 -> 192.168.1.120
+192.168.1.0111 11 00 -> 192.168.1.124
+
+And let's configure the serial links:
+
+![serial links](https://github.com/brendanreg/ipv4SubnetLab/assets/48809270/6b337711-593e-4d61-96b6-0097b7bcdcbb)
+
+And finally let's verify network connectivity for all of the sites:
+
+![connectivityverification](https://github.com/brendanreg/ipv4SubnetLab/assets/48809270/8319964d-de0f-459a-b074-f8cac05cd79a)
+
+Boom, as you can see PCs from each site can connect to the internet successfully.
